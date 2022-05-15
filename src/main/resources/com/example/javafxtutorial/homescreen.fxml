@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #B0C4DE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtutorial.HomeController">
+   <children>
+      <Button id="start" fx:id="btn" alignment="CENTER" layoutX="119.0" layoutY="241.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="65.0" prefWidth="162.0" style="-fx-background-color: #4682B4; -fx-font-weight: bold;" text="Start" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="97.0" layoutY="62.0" prefHeight="86.0" prefWidth="206.0" style="-fx-font-weight: bold;" text=" BattleshipFX" textFill="#2d5356">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
