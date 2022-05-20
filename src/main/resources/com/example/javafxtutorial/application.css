@@ -3,3 +3,14 @@
     -fx-background-radius: 10;
     -fx-cursor: hand;
 }
+
+#random_btn, #delete_btn, #rotate_btn {
+    -fx-background-radius: 50;
+    -fx-background-color: #EEEEEE;
+    -fx-cursor: hand;
+}
+
+#random_btn:hover, #delete_btn:hover, #rotate_btn:hover{
+    -fx-background-color: #F5B164;
+}
+

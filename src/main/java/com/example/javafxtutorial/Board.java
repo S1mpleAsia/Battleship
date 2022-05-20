@@ -2,9 +2,12 @@ package com.example.javafxtutorial;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,6 @@ public class Board extends Parent {
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlaceShip(ship, x, y)) {
             int length = ship.type;
-
             if (ship.vertical) {
                 for (int i = (int) Math.ceil(y - (double)length/2); i < (int) Math.ceil(y + (double)length/2); i++) {
                     Cell cell = getCell(x, i);
@@ -51,6 +53,11 @@ public class Board extends Parent {
                     if (!enemy) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
+//                        if(length == 3) {
+//                            if(i == x) cell.setFill(new ImagePattern(mid));
+//                            else if(i == x - 1) cell.setFill(new ImagePattern(bottom));
+//                            else if(i == x + 1) cell.setFill(new ImagePattern(head));
+//                        }
                     }
                 }
             }
@@ -136,4 +143,18 @@ public class Board extends Parent {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
+    Image head = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\CruiserCut\\HeadCruiser.png");
+    Image bottom = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\CruiserCut\\BottomCruiser.png");
+    Image mid = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\CruiserCut\\MidCruiser.png");
+    public void setImageOfShipCruiser(int shipSize,int x,int y,Image head, Image bottom, Image mid) {
+        getCell(x,y).setFill(new ImagePattern(mid));
+        getCell(x - 1,y).setFill(new ImagePattern(bottom));
+        getCell(x + 1,y).setFill(new ImagePattern(head));
+    }
+
+    public void setShipImages(Ship ship,int x,int y){
+        if(!ship.vertical && ship.type == ShipType.CARRIER.size) {
+            setImageOfShipCruiser(ship.type,x,y,head,bottom,mid);
+        }
+    }
 }
