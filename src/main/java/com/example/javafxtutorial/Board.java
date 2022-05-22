@@ -40,6 +40,8 @@ public class Board extends Parent {
                 for (int i = (int) Math.ceil(y - (double)length/2); i < (int) Math.ceil(y + (double)length/2); i++) {
                     Cell cell = getCell(x, i);
                     cell.ship = ship;
+                    cell.ship.x = x;
+                    cell.ship.y = y;
                     if (!enemy) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
@@ -50,6 +52,8 @@ public class Board extends Parent {
                 for (int i = (int) Math.ceil(x - (double)length/2); i < (int) Math.ceil(x + (double)length/2); i++) {
                     Cell cell = getCell(i, y);
                     cell.ship = ship;
+                    cell.ship.x = x;
+                    cell.ship.y = y;
                     if (!enemy) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
@@ -93,7 +97,7 @@ public class Board extends Parent {
     }
 
 
-    private boolean canPlaceShip(Ship ship, int x, int y) {
+    public boolean canPlaceShip(Ship ship, int x, int y) {
         int length = ship.type;
 
         if (ship.vertical) {
@@ -134,6 +138,47 @@ public class Board extends Parent {
         }
 
         return true;
+    }
+    public void rotateShip(Ship ship,int x,int y) {
+        int length = ship.type;
+
+        if(!ship.vertical) {
+            ship.vertical = true;
+            for (int i = (int) Math.ceil(x - (double)length/2); i < (int) Math.ceil(x + (double)length/2); i++) {
+                Cell cell = getCell(i,y);
+                if(cell.ship != null) cell.ship = null;
+
+                if(!enemy) {
+                    cell.setFill(Color.LIGHTGRAY);
+                    cell.setStroke(Color.BLACK);
+                    cell.setStrokeWidth(1);
+                }
+            }
+            if(canPlaceShip(ship,x,y)) placeShip(ship,x,y);
+            else{
+                ship.vertical = false;
+                placeShip(ship,x,y);
+            }
+        }
+
+        else {
+            ship.vertical = false;
+            for (int i = (int) Math.ceil(y - (double)length/2); i < (int) Math.ceil(y + (double)length/2); i++) {
+                Cell cell = getCell(x,i);
+                if(cell.ship != null) cell.ship = null;
+
+                if(!enemy) {
+                    cell.setFill(Color.LIGHTGRAY);
+                    cell.setStroke(Color.BLACK);
+                    cell.setStrokeWidth(1);
+                }
+            }
+            if(canPlaceShip(ship,x,y)) placeShip(ship,x,y);
+            else{
+                ship.vertical = true;
+                placeShip(ship,x,y);
+            }
+        }
     }
     private boolean isValidPoint(Point2D point) {
         return isValidPoint(point.getX(),point.getY());

@@ -69,6 +69,7 @@ public class PrepareController implements Initializable{
         ShipsToBePlaced.setOnMousePressed(mouseEvent -> {
             ImageView source = (ImageView) mouseEvent.getTarget();
             System.out.println(GridPane.getRowIndex(source));
+            final boolean[] check = {false};
 
             source.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
@@ -127,7 +128,7 @@ public class PrepareController implements Initializable{
                         boolean success = false;
                         Cell cell = (Cell)dragEvent.getPickResult().getIntersectedNode();
 
-                        if(db.hasImage() && cell != null && cell.ship == null) {
+                        if(db.hasImage() && cell != null) {
                             Integer cIndex = cell.x;
                             Integer rIndex = cell.y;
 
@@ -137,31 +138,44 @@ public class PrepareController implements Initializable{
                             System.out.println(y);
 
                             if(source.getFitWidth() == 200){
-                                playerBoard.placeShip(new Ship(5,false),x,y);
-                                shipArray.remove(ShipType.CARRIER.name);
+                                if(playerBoard.canPlaceShip(carrier,x,y)) {
+                                    check[0] = true;
+                                    playerBoard.placeShip(carrier,x,y);
+                                    shipArray.remove(ShipType.CARRIER.name);
+                                }
                             }
                             else if(source.getFitWidth() == 160){
-                                playerBoard.placeShip(new Ship(4,false),x,y);
-                                shipArray.remove(ShipType.BATTLESHIP.name);
+                                if(playerBoard.canPlaceShip(battleship,x,y)) {
+                                    check[0] = true;
+                                    playerBoard.placeShip(battleship,x,y);
+                                    shipArray.remove(ShipType.BATTLESHIP.name);
+                                }
                             }
                             else if(source.getFitWidth() == 120 && source.getImage() == image2){
-                                Ship ship = new Ship(3,false);
-                                playerBoard.placeShip(ship,x,y);
-                                shipArray.remove(ShipType.CRUISER.name);
-                                playerBoard.setShipImages(ship,x,y);
+                                if(playerBoard.canPlaceShip(cruiser,x,y)) {
+                                    check[0] = true;
+                                    playerBoard.placeShip(cruiser,x,y);
+                                    shipArray.remove(ShipType.CRUISER.name);
+                                }
+//                                playerBoard.setShipImages(submarine,x,y);
                             }
 
                             else if(source.getFitWidth() == 120 && source.getImage() == image3){
-                                Ship ship = new Ship(3,false);
-                                playerBoard.placeShip(ship,x,y);
-                                shipArray.remove(ShipType.SUBMARINE.name);
-                                playerBoard.setShipImages(ship,x,y);
+                                if(playerBoard.canPlaceShip(submarine,x,y)) {
+                                    check[0] = true;
+                                    playerBoard.placeShip(submarine,x,y);
+                                    shipArray.remove(ShipType.SUBMARINE.name);
+                                }
+//                                playerBoard.setShipImages(submarine,x,y);
                             }
 
 
                             else if(source.getFitWidth() == 80){
-                                playerBoard.placeShip(new Ship(2,false),x,y);
-                                shipArray.remove(ShipType.DESTROYER.name);
+                                if(playerBoard.canPlaceShip(destroyer,x,y)) {
+                                    check[0] = true;
+                                    playerBoard.placeShip(destroyer,x,y);
+                                    shipArray.remove(ShipType.DESTROYER.name);
+                                }
                             }
 
                             success = true;
@@ -175,12 +189,18 @@ public class PrepareController implements Initializable{
                     @Override
                     public void handle(DragEvent dragEvent) {
                         if(dragEvent.getTransferMode() == TransferMode.MOVE){
-                            ShipsToBePlaced.getChildren().remove(source);
+                            if(check[0]) ShipsToBePlaced.getChildren().remove(source);
                             System.out.println("DragDone");
                         }
                         dragEvent.consume();
                     }
                 });
+        });
+
+        playerBoard.setOnMousePressed(event -> {
+            Cell cell = (Cell) event.getTarget();
+
+            playerBoard.rotateShip(cell.ship,cell.ship.x,cell.ship.y);
         });
 
         ShipsToBePlaced.setLayoutX(750);
@@ -218,8 +238,17 @@ public class PrepareController implements Initializable{
     private final String[] shipName = {"Carrier","Battleship","Cruiser","Submarine","Destroyer"};
     private final ImageView horizontal = new ImageView("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\horizontal.png");
     private final ImageView rotate = new ImageView("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\rotate.png");
+
+    private Ship carrier = new Ship(5,false,"Carrier");
+    private Ship battleship = new Ship(4,false,"Battleship");
+    private Ship cruiser = new Ship(3,false,"Cruiser");
+    private Ship submarine = new Ship(3,false,"Submarine");
+    private Ship destroyer = new Ship(2,false,"Destroyer");
+
+
     @FXML
     private void randomShip(ActionEvent event) {
+        resetShip(event);
         Random random = new Random();
 
         while(!shipArray.isEmpty()) {
@@ -271,6 +300,7 @@ public class PrepareController implements Initializable{
             for(int j = 0;j < 10;j++){
                 Cell cell = playerBoard.getCell(i,j);
                 if(cell.ship != null){
+                    cell.ship.vertical = false;
                     cell.ship = null;
                     cell.setFill(Color.LIGHTGRAY);
                     cell.setStroke(Color.BLACK);
@@ -329,12 +359,13 @@ public class PrepareController implements Initializable{
 //        else if(vertical){
 //            vertical = false;
 //        }
-
-        Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
+        if(ShipsToBePlaced.getChildren().isEmpty()){
+            Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        }
     }
 }
