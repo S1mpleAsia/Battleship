@@ -11,11 +11,18 @@ import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Board extends Parent {
     private VBox box = new VBox();
     boolean enemy = false;
     public int ships = 5;
+
+//    private Image[] cruiser = {
+//            new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\Image\\CruiserCut\\cruiser-horizontal_01.png"),
+//            new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\Image\\CruiserCut\\cruiser-horizontal_02.png"),
+//            new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\Image\\CruiserCut\\cruiser-horizontal_03.png"),
+//    };
 
 
     public Board(boolean enemy/*, EventHandler<? super MouseEvent> handler*/) {
@@ -23,7 +30,7 @@ public class Board extends Parent {
         for(int i = 0;i < 10;i++){
             HBox row = new HBox();
             for(int j = 0;j < 10;j++) {
-                Cell cell = new Cell(i, j, this);
+                Cell cell = new Cell(j, i, this);
 //              cell.setOnMouseClicked(handler);
                 row.getChildren().add(cell);
             }
@@ -57,11 +64,7 @@ public class Board extends Parent {
                     if (!enemy) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
-//                        if(length == 3) {
-//                            if(i == x) cell.setFill(new ImagePattern(mid));
-//                            else if(i == x - 1) cell.setFill(new ImagePattern(bottom));
-//                            else if(i == x + 1) cell.setFill(new ImagePattern(head));
-//                        }
+//                        if(Objects.equals(ship.name, ShipType.CRUISER.name)) cell.setFill(new ImagePattern(cruiser[i-x+1]));
                     }
                 }
             }
@@ -77,7 +80,7 @@ public class Board extends Parent {
         return (Cell)((HBox)box.getChildren().get(y)).getChildren().get(x);
     }
 
-    private Cell[] getNeighbors(int x,int y){
+    public Cell[] getNeighbors(int x,int y){
         Point2D[] points = new Point2D[] {
                 new Point2D(x - 1, y),
                 new Point2D(x + 1, y),
@@ -186,20 +189,5 @@ public class Board extends Parent {
 
     private boolean isValidPoint(double x,double y){
         return x >= 0 && x < 10 && y >= 0 && y < 10;
-    }
-
-    Image head = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\CruiserCut\\HeadCruiser.png");
-    Image bottom = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\CruiserCut\\BottomCruiser.png");
-    Image mid = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\CruiserCut\\MidCruiser.png");
-    public void setImageOfShipCruiser(int shipSize,int x,int y,Image head, Image bottom, Image mid) {
-        getCell(x,y).setFill(new ImagePattern(mid));
-        getCell(x - 1,y).setFill(new ImagePattern(bottom));
-        getCell(x + 1,y).setFill(new ImagePattern(head));
-    }
-
-    public void setShipImages(Ship ship,int x,int y){
-        if(!ship.vertical && ship.type == ShipType.CARRIER.size) {
-            setImageOfShipCruiser(ship.type,x,y,head,bottom,mid);
-        }
     }
 }

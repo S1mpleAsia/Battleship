@@ -32,18 +32,18 @@ public class PrepareController implements Initializable{
         shipArray.addAll(Arrays.asList(shipName));
         myShip.getItems().addAll(Ship);
         gameMode.getItems().addAll(Mode);
+        gameMode.getSelectionModel().select(0);
         playerBoard.setLayoutX(160);
         playerBoard.setLayoutY(250);
-        btnRandom.setGraphic(new ImageView("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\random.png"));
-        btnDelete.setGraphic(new ImageView("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\trash.png"));
+        btnRandom.setGraphic(new ImageView(getClass().getResource("Image") + "random.png"));
+        btnDelete.setGraphic(new ImageView(getClass().getResource("Image") + "trash.png"));
         btnRotate.setGraphic(horizontal);
 
-
-        Image image0 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\carrier-horizontal.png",245,57,false,false);
-        Image image1 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\battleship-horizontal.png");
-        Image image2 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\cruiser-horizontal.png");
-        Image image3 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\submarine-horizontal.png");
-        Image image4 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\destroyer-horizontal.png");
+        Image image0 = new Image(getClass().getResource("Image") + "carrier-horizontal.png",245,57,false,false);
+        Image image1 = new Image(getClass().getResource("Image") + "battleship-horizontal.png");
+        Image image2 = new Image(getClass().getResource("Image") + "cruiser-horizontal.png");
+        Image image3 = new Image(getClass().getResource("Image") + "submarine-horizontal.png");
+        Image image4 = new Image(getClass().getResource("Image") + "destroyer-horizontal.png");
 
         ships = new ImageView[5];
         ships[0] = new ImageView(image0);
@@ -129,11 +129,8 @@ public class PrepareController implements Initializable{
                         Cell cell = (Cell)dragEvent.getPickResult().getIntersectedNode();
 
                         if(db.hasImage() && cell != null) {
-                            Integer cIndex = cell.x;
-                            Integer rIndex = cell.y;
-
-                            int y = cIndex == null ? 0 : cIndex;
-                            int x = rIndex == null ? 0 : rIndex;
+                            int x = cell.x;
+                            int y = cell.y;
                             System.out.println(x);
                             System.out.println(y);
 
@@ -198,6 +195,7 @@ public class PrepareController implements Initializable{
         });
 
         playerBoard.setOnMousePressed(event -> {
+            if(running) return;
             Cell cell = (Cell) event.getTarget();
 
             playerBoard.rotateShip(cell.ship,cell.ship.x,cell.ship.y);
@@ -225,7 +223,7 @@ public class PrepareController implements Initializable{
     public static Board playerBoard = new Board(false);
     private ImageView[] ships;
     private GridPane ShipsToBePlaced = new GridPane();
-    private boolean vertical = false;
+    public static String mode;
 
     @FXML
     private Button btnRandom;
@@ -236,14 +234,16 @@ public class PrepareController implements Initializable{
 
     private ArrayList<String> shipArray = new ArrayList<String>();
     private final String[] shipName = {"Carrier","Battleship","Cruiser","Submarine","Destroyer"};
-    private final ImageView horizontal = new ImageView("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\horizontal.png");
-    private final ImageView rotate = new ImageView("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\rotate.png");
+    private final ImageView horizontal = new ImageView(getClass().getResource("Image") + "horizontal.png");
+    private final ImageView rotate = new ImageView(getClass().getResource("Image") + "rotate.png");
 
     private Ship carrier = new Ship(5,false,"Carrier");
     private Ship battleship = new Ship(4,false,"Battleship");
     private Ship cruiser = new Ship(3,false,"Cruiser");
     private Ship submarine = new Ship(3,false,"Submarine");
     private Ship destroyer = new Ship(2,false,"Destroyer");
+
+    boolean running = false;
 
 
     @FXML
@@ -322,44 +322,11 @@ public class PrepareController implements Initializable{
 
     @FXML
     private void rotateShip(ActionEvent event) throws IOException {
-//        if(btnRotate.getGraphic() == horizontal) btnRotate.setGraphic(rotate);
-//        else if(btnRotate.getGraphic() == rotate) btnRotate.setGraphic(horizontal);
-//
-//        if(!vertical){
-//            ShipsToBePlaced.getChildren().removeAll(ships);
-//            Image image0 = new Image(String.valueOf(this.getClass().getResource("com/example/javafxtutorial/ShipImage/carrier.png")));
-//            Image image1 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\battleship.png");
-//            Image image2 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\cruiser.png");
-//            Image image3 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\submarine.png");
-//            Image image4 = new Image("D:\\Java Project\\JavaFxTutorial\\src\\main\\resources\\com\\example\\javafxtutorial\\ShipImage\\destroyer.png");
-//
-//            ships[0] = new ImageView(image0);
-//            ships[1] = new ImageView(image1);
-//            ships[2] = new ImageView(image2);
-//            ships[3] = new ImageView(image3);
-//            ships[4] = new ImageView(image4);
-//
-//            for(int i = 0;i < 5;i++){
-//                ships[i].setPreserveRatio(true);
-//            }
-//
-//            ships[0].setFitHeight(200);
-//            ships[1].setFitHeight(160);
-//            ships[2].setFitHeight(120);
-//            ships[3].setFitHeight(120);
-//            ships[4].setFitHeight(80);
-//
-//            for(int i = 0;i < 5;i++){
-//                    ShipsToBePlaced.add(ships[i],i,0);
-//            }
-//
-//            vertical = true;
-//        }
-//
-//        else if(vertical){
-//            vertical = false;
-//        }
+        running = true;
         if(ShipsToBePlaced.getChildren().isEmpty()){
+            mode = gameMode.getSelectionModel().getSelectedItem();
+            System.out.println(mode);
+
             Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

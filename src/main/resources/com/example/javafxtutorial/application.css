@@ -1,12 +1,12 @@
-#start{
+#play_btn, #score_btn, #exit_btn, #sound_btn{
     -fx-font-size: 22;
     -fx-background-radius: 10;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.8), 10, 0, 2, 2);
 }
 
 #random_btn, #delete_btn, #rotate_btn {
     -fx-background-radius: 50;
-    -fx-background-color: #EEEEEE;
     -fx-cursor: hand;
 }
 

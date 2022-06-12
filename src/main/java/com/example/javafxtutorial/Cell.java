@@ -1,11 +1,12 @@
 package com.example.javafxtutorial;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 
 public class Cell extends Rectangle {
-    public static final int edge = 40;
     public int x,y;
     public Ship ship = null;
     public boolean wasShot = false;
@@ -21,13 +22,14 @@ public class Cell extends Rectangle {
         setStrokeWidth(1);
     }
 
-    public boolean shoot() {
+    public boolean shoot(boolean enemy) {
         wasShot = true;
         setFill(Color.BLACK);
 
         if(ship != null) {
             ship.hit();
-            setFill(Color.RED);
+            if(enemy) setFill(new ImagePattern(new Image(getClass().getResource("Image") + "hit.png")));
+            else setFill(Color.RED);
             if(!ship.isAlive()) {
                 board.ships--;
             }

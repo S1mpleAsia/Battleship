@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #B0C4DE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtutorial.HomeController">
+<AnchorPane id="home_screen" fx:id="homeScreen" prefHeight="650.0" prefWidth="500.0" style="-fx-background-color: #B0C4DE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtutorial.HomeController">
    <children>
-      <Button id="start" fx:id="btn" alignment="CENTER" layoutX="119.0" layoutY="241.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="65.0" prefWidth="162.0" style="-fx-background-color: #4682B4; -fx-font-weight: bold;" text="Start" textFill="WHITE">
+      <ImageView fitHeight="650.0" fitWidth="500.0" layoutY="1.0">
+         <image>
+            <Image url="@Image/background.png" />
+         </image>
+      </ImageView>
+      <Button id="play_btn" fx:id="playButton" alignment="CENTER" layoutX="151.0" layoutY="326.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="66.0" prefWidth="189.0" style="-fx-background-color: #F99A30; -fx-font-weight: bold;" text="PLAY" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="97.0" layoutY="62.0" prefHeight="86.0" prefWidth="206.0" style="-fx-font-weight: bold;" text=" BattleshipFX" textFill="#2d5356">
+      <Button id="score_btn" fx:id="scoreButton" alignment="CENTER" layoutX="155.0" layoutY="421.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="190.0" style="-fx-background-color: #F99A30; -fx-font-weight: bold;" text="HIGH SCORE" textFill="WHITE">
          <font>
-            <Font size="28.0" />
+            <Font size="22.0" />
          </font>
-      </Label>
+      </Button>
+      <Button id="exit_btn" fx:id="exitButton" alignment="CENTER" layoutX="153.0" layoutY="519.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="66.0" prefWidth="190.0" style="-fx-background-color: #F99A30; -fx-font-weight: bold;" text="EXIT" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button id="sound_btn" fx:id="soundButton" layoutX="430.0" layoutY="14.0" mnemonicParsing="false" onAction="#soundEffect" prefHeight="44.0" prefWidth="43.0" style="-fx-background-color: #F99A30;" stylesheets="@application.css">
+         <graphic>
+            <ImageView fx:id="soundIcon" fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Image/sound.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>

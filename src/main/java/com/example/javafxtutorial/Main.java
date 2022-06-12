@@ -14,13 +14,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) {
         try {
             primaryStage.setTitle("Battleship Game");
             Parent root = FXMLLoader.load(getClass().getResource("homescreen.fxml"));
-            Scene scene = new Scene(root,400,500);
+            Scene scene = new Scene(root);
             scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
