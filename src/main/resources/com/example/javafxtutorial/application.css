@@ -5,12 +5,12 @@
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.8), 10, 0, 2, 2);
 }
 
-#random_btn, #delete_btn, #rotate_btn {
+#random_btn, #delete_btn, #rotate_btn, #start_btn, #back_btn {
     -fx-background-radius: 50;
     -fx-cursor: hand;
 }
 
-#random_btn:hover, #delete_btn:hover, #rotate_btn:hover{
+#random_btn:hover, #delete_btn:hover, #rotate_btn:hover, #start_btn:hover, #back_btn:hover{
     -fx-background-color: #F5B164;
 }
 
