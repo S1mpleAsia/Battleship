@@ -215,7 +215,7 @@ public class PrepareController implements Initializable{
 
     @FXML
     private ChoiceBox<String> gameMode;
-    private String[] Mode = {"Easy","Hard"};
+    private String[] Mode = {"Easy","Medium", "Hard"};
 
     @FXML
     private AnchorPane root;
