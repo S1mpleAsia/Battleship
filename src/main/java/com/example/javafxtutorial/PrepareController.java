@@ -259,34 +259,34 @@ public class PrepareController implements Initializable{
             if(playerBoard.getCell(x,y).ship != null) continue;
             for(String str : shipArray) {
                 if(str.equals(ShipType.CARRIER.name)){
-                    boolean check = playerBoard.placeShip(new Ship(ShipType.CARRIER.size,Math.random() < 0.5),x,y);
+                    boolean check = playerBoard.placeShip(new Ship(ShipType.CARRIER.size,Math.random() < 0.5,ShipType.CARRIER.name),x,y);
                     if(check) shipArray.remove(ShipType.CARRIER.name);
                     ShipsToBePlaced.getChildren().remove(ships[0]);
                     break;
                 }
                 else if(str.equals(ShipType.BATTLESHIP.name)){
-                    boolean check = playerBoard.placeShip(new Ship(ShipType.BATTLESHIP.size,Math.random() < 0.5),x,y);
+                    boolean check = playerBoard.placeShip(new Ship(ShipType.BATTLESHIP.size,Math.random() < 0.5,ShipType.BATTLESHIP.name),x,y);
                     if(check) shipArray.remove(ShipType.BATTLESHIP.name);
                     ShipsToBePlaced.getChildren().remove(ships[1]);
                     break;
                 }
 
                 else if(str.equals(ShipType.CRUISER.name)){
-                    boolean check = playerBoard.placeShip(new Ship(ShipType.CRUISER.size,Math.random() < 0.5),x,y);
+                    boolean check = playerBoard.placeShip(new Ship(ShipType.CRUISER.size,Math.random() < 0.5,ShipType.CRUISER.name),x,y);
                     if(check) shipArray.remove(ShipType.CRUISER.name);
                     ShipsToBePlaced.getChildren().remove(ships[2]);
                     break;
                 }
 
                 else if(str.equals(ShipType.SUBMARINE.name)){
-                    boolean check = playerBoard.placeShip(new Ship(ShipType.SUBMARINE.size,Math.random() < 0.5),x,y);
+                    boolean check = playerBoard.placeShip(new Ship(ShipType.SUBMARINE.size,Math.random() < 0.5,ShipType.SUBMARINE.name),x,y);
                     if(check) shipArray.remove(ShipType.SUBMARINE.name);
                     ShipsToBePlaced.getChildren().remove(ships[3]);
                     break;
                 }
 
                 else if(str.equals(ShipType.DESTROYER.name)){
-                    boolean check = playerBoard.placeShip(new Ship(ShipType.DESTROYER.size,Math.random() < 0.5),x,y);
+                    boolean check = playerBoard.placeShip(new Ship(ShipType.DESTROYER.size,Math.random() < 0.5,ShipType.DESTROYER.name),x,y);
                     if(check) shipArray.remove(ShipType.DESTROYER.name);
                     ShipsToBePlaced.getChildren().remove(ships[4]);
                     break;
