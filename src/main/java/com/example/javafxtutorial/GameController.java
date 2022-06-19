@@ -18,7 +18,7 @@ public class GameController implements Initializable {
     private  boolean enemyTurn = false;
     private Random random = new Random();
     private Cell rootTarget;
-    private Queue<Cell> nextTarget = new LinkedList<>();
+    private LinkedList<Cell> nextTarget = new LinkedList<>();
 
 
     @Override
@@ -83,7 +83,7 @@ public class GameController implements Initializable {
 
         else if(Objects.equals(mode, "Medium")){
 
-            // VU ANH TUAN - Hard Mode
+            // VU ANH TUAN - Medium Mode
             if(nextTarget.isEmpty()){
                 int x,y;
                 do{
@@ -96,51 +96,87 @@ public class GameController implements Initializable {
                 System.out.println(rootTarget.x);
                 System.out.println(rootTarget.y);
 
+                rootTarget.shoot(false);
+
                 if(rootTarget.ship != null){
-                    if(rootTarget.x == 0){
-                        Cell neighbor = new Cell(rootTarget.x+1, rootTarget.y,playerBoard);
+                    if((rootTarget.x+1) <= 9){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x+1, rootTarget.y);
                         if((!neighbor.wasShot)) nextTarget.offer(neighbor);
                     }
 
-                    else if (rootTarget.x == 9){
-                        Cell neighbor = new Cell(rootTarget.x-1, rootTarget.y,playerBoard);
+                    if ((rootTarget.y+1) <= 9){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x, rootTarget.y+1);
                         if((!neighbor.wasShot)) nextTarget.offer(neighbor);
                     }
 
-                    else {
-                        Cell[] neighbors = {
-                                new Cell(rootTarget.x+1, rootTarget.y,playerBoard),
-                                new Cell(rootTarget.x-1, rootTarget.y,playerBoard)
-                        };
-                        for(Cell neighbor : neighbors)
-                            if((!neighbor.wasShot)) nextTarget.offer(neighbor);
+                    if ((rootTarget.x-1) >= 0){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x-1, rootTarget.y);
+                        if((!neighbor.wasShot)) nextTarget.offer(neighbor);
+                    }
+
+
+                    if ((rootTarget.y-1) >= 0){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x, rootTarget.y-1);
+                        if((!neighbor.wasShot)) nextTarget.offer(neighbor);
                     }
                 }
-
-                rootTarget.shoot(false);
-                enemyTurn = false;
             }
             else {
-                Cell cell;
-                do{
-                    cell = nextTarget.poll();
-                } while (playerBoard.getCell(cell.x, cell.y).wasShot);
+                Cell cell = nextTarget.poll();
                 Cell target = playerBoard.getCell(cell.x, cell.y);
+                System.out.println(target.x);
+                System.out.println(target.y);
 
-                if (target.ship != null){
-                    if((target.x < rootTarget.x) && (target.x>0)){
-                        Cell neighbor = new Cell(target.x-1, target.y, playerBoard);
-                        if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                if ((target.ship != null)){
+
+//                    if (target.y == rootTarget.y) {
+//                        while (true){
+//                            Cell c = nextTarget.getLast();
+//                            if (c.x == rootTarget.x) nextTarget.removeLast();
+//                            else break;
+//                        }
+//                    }
+//                    else {
+//                        while (true){
+//                            Cell c = nextTarget.getFirst();
+//                            if (c.y == rootTarget.y) nextTarget.removeFirst();
+//                            else break;
+//                        }
+//                    }
+
+                    if(target.x < rootTarget.x){
+                        if (target.x>0) {
+                            Cell neighbor = new Cell(target.x-1, target.y, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.x == rootTarget.x);
                     }
-                    else if ((target.x > rootTarget.x) && (target.x <9)){
-                        Cell neighbor = new Cell(target.x+1, target.y, playerBoard);
-                        if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                    else if(target.x > rootTarget.x){
+                        if (target.x<9) {
+                            Cell neighbor = new Cell(target.x+1, target.y, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.x == rootTarget.x);
+                    }
+                    else if(target.y < rootTarget.y){
+                        if (target.y>0) {
+                            Cell neighbor = new Cell(target.x, target.y-1, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.y == rootTarget.y);
+                    }
+                    else if(target.y > rootTarget.y){
+                        if (target.y<9) {
+                            Cell neighbor = new Cell(target.x, target.y+1, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.y == rootTarget.y);
                     }
                 }
 
                 target.shoot(false);
-                enemyTurn = false;
             }
+            enemyTurn = false;
 
             if(playerBoard.ships == 0) {
                 System.out.println("You lose");
@@ -149,6 +185,8 @@ public class GameController implements Initializable {
 
         }
         else if (Objects.equals(mode, "Hard")){
+
+            // VU ANH TUAN - Hard Mode
             if(nextTarget.isEmpty()){
                 int x,y;
                 do{
@@ -161,51 +199,87 @@ public class GameController implements Initializable {
                 System.out.println(rootTarget.x);
                 System.out.println(rootTarget.y);
 
+                rootTarget.shoot(false);
+
                 if(rootTarget.ship != null){
-                    if(rootTarget.x == 0){
-                        Cell neighbor = new Cell(rootTarget.x+1, rootTarget.y,playerBoard);
+                    if((rootTarget.x+1) <= 9){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x+1, rootTarget.y);
                         if((!neighbor.wasShot)) nextTarget.offer(neighbor);
                     }
 
-                    else if (rootTarget.x == 9){
-                        Cell neighbor = new Cell(rootTarget.x-1, rootTarget.y,playerBoard);
+                    if ((rootTarget.y+1) <= 9){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x, rootTarget.y+1);
                         if((!neighbor.wasShot)) nextTarget.offer(neighbor);
                     }
 
-                    else {
-                        Cell[] neighbors = {
-                                new Cell(rootTarget.x+1, rootTarget.y,playerBoard),
-                                new Cell(rootTarget.x-1, rootTarget.y,playerBoard)
-                        };
-                        for(Cell neighbor : neighbors)
-                            if((!neighbor.wasShot)) nextTarget.offer(neighbor);
+                    if ((rootTarget.x-1) >= 0){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x-1, rootTarget.y);
+                        if((!neighbor.wasShot)) nextTarget.offer(neighbor);
+                    }
+
+
+                    if ((rootTarget.y-1) >= 0){
+                        Cell neighbor = playerBoard.getCell(rootTarget.x, rootTarget.y-1);
+                        if((!neighbor.wasShot)) nextTarget.offer(neighbor);
                     }
                 }
-
-                rootTarget.shoot(false);
-                enemyTurn = false;
             }
             else {
-                Cell cell;
-                do{
-                    cell = nextTarget.poll();
-                } while (playerBoard.getCell(cell.x, cell.y).wasShot);
+                Cell cell = nextTarget.poll();
                 Cell target = playerBoard.getCell(cell.x, cell.y);
+                System.out.println(target.x);
+                System.out.println(target.y);
 
-                if (target.ship != null){
-                    if((target.x < rootTarget.x) && (target.x>0)){
-                        Cell neighbor = new Cell(target.x-1, target.y, playerBoard);
-                        if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                if ((target.ship != null)){
+
+//                    if (target.y == rootTarget.y) {
+//                        while (true){
+//                            Cell c = nextTarget.getLast();
+//                            if (c.x == rootTarget.x) nextTarget.removeLast();
+//                            else break;
+//                        }
+//                    }
+//                    else {
+//                        while (true){
+//                            Cell c = nextTarget.getFirst();
+//                            if (c.y == rootTarget.y) nextTarget.removeFirst();
+//                            else break;
+//                        }
+//                    }
+
+                    if(target.x < rootTarget.x){
+                        if (target.x>0) {
+                            Cell neighbor = new Cell(target.x-1, target.y, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.x == rootTarget.x);
                     }
-                    else if ((target.x > rootTarget.x) && (target.x <9)){
-                        Cell neighbor = new Cell(target.x+1, target.y, playerBoard);
-                        if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                    else if(target.x > rootTarget.x){
+                        if (target.x<9) {
+                            Cell neighbor = new Cell(target.x+1, target.y, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.x == rootTarget.x);
+                    }
+                    else if(target.y < rootTarget.y){
+                        if (target.y>0) {
+                            Cell neighbor = new Cell(target.x, target.y-1, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.y == rootTarget.y);
+                    }
+                    else if(target.y > rootTarget.y){
+                        if (target.y<9) {
+                            Cell neighbor = new Cell(target.x, target.y+1, playerBoard);
+                            if(!neighbor.wasShot) nextTarget.offer(neighbor);
+                        }
+                        nextTarget.removeIf(c -> c.y == rootTarget.y);
                     }
                 }
 
                 target.shoot(false);
-                enemyTurn = false;
             }
+            enemyTurn = false;
 
             if(playerBoard.ships == 0) {
                 System.out.println("You lose");
