@@ -335,13 +335,15 @@ public class PrepareController implements Initializable{
     public void switchToScene3(ActionEvent event) throws IOException {
         mode = gameMode.getSelectionModel().getSelectedItem();
         System.out.println(mode);
-
-        Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
+        running = true;
+        if(ShipsToBePlaced.getChildren().isEmpty()) {
+            Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+        }
     }
 
     @FXML
