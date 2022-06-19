@@ -216,7 +216,7 @@ public class PrepareController implements Initializable{
 
     @FXML
     private ChoiceBox<String> gameMode;
-    private String[] Mode = {"Easy","Hard"};
+    private String[] Mode = {"Easy","Medium","Hard"};
 
     @FXML
     private AnchorPane root;
@@ -226,6 +226,10 @@ public class PrepareController implements Initializable{
     private GridPane ShipsToBePlaced = new GridPane();
     public static String mode;
 
+    @FXML
+    private Button btnStart;
+    @FXML
+    private Button btnBack;
     @FXML
     private Button btnRandom;
     @FXML
@@ -324,16 +328,29 @@ public class PrepareController implements Initializable{
     @FXML
     private void rotateShip(ActionEvent event) throws IOException {
         running = true;
-        if(ShipsToBePlaced.getChildren().isEmpty()){
-            mode = gameMode.getSelectionModel().getSelectedItem();
-            System.out.println(mode);
 
-            Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.show();
-        }
+    }
+
+    @FXML
+    public void switchToScene3(ActionEvent event) throws IOException {
+        mode = gameMode.getSelectionModel().getSelectedItem();
+        System.out.println(mode);
+
+        Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    public void switchToScene1(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("homescreen.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 }

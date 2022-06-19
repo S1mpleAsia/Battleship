@@ -29,11 +29,14 @@ import java.util.ResourceBundle;
 
 
 public class HomeController implements Initializable {
+    // Sử dụng cho Âm thanh
     private File directory;
     private File[] files;
     private ArrayList<File> songs;
     private Media media;
     private MediaPlayer mediaPlayer;
+
+    // Sử dụng cho hình ảnh
     @FXML
     private ImageView soundIcon;
     @FXML
@@ -61,10 +64,16 @@ public class HomeController implements Initializable {
         mediaPlayer.play();
     }
     @FXML
+    /**
+     * Thoát chương trình
+     */
     public void exitGame(ActionEvent event) {
         System.exit(0);
     }
     @FXML
+    /**
+     * Chuyển sang Sence 2
+     */
     public void switchToScene2(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("preparationscreen.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -75,6 +84,9 @@ public class HomeController implements Initializable {
     }
 
     @FXML
+    /**
+     * Thiết lập Bật/Tắt âm thanh
+     */
     public void soundEffect(ActionEvent event) {
         Image sound = soundIcon.getImage();
 
