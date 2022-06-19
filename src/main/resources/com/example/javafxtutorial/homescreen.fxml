@@ -18,7 +18,7 @@
             <Font size="22.0" />
          </font>
       </Button>
-      <Button id="score_btn" fx:id="scoreButton" alignment="CENTER" layoutX="155.0" layoutY="421.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="190.0" style="-fx-background-color: #F99A30; -fx-font-weight: bold;" text="HIGH SCORE" textFill="WHITE">
+      <Button id="score_btn" fx:id="scoreButton" alignment="CENTER" layoutX="155.0" layoutY="421.0" mnemonicParsing="false" onAction="#showHighScore" prefHeight="66.0" prefWidth="190.0" style="-fx-background-color: #F99A30; -fx-font-weight: bold;" text="HIGH SCORE" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>

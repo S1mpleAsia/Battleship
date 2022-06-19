@@ -197,6 +197,7 @@ public class PrepareController implements Initializable{
         playerBoard.setOnMousePressed(event -> {
             if(running) return;
             Cell cell = (Cell) event.getTarget();
+            if(cell.ship == null) return;
 
             playerBoard.rotateShip(cell.ship,cell.ship.x,cell.ship.y);
         });

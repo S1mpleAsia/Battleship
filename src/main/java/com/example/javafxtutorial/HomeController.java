@@ -9,9 +9,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +36,8 @@ public class HomeController implements Initializable {
     private MediaPlayer mediaPlayer;
     @FXML
     private ImageView soundIcon;
+    @FXML
+    private AnchorPane highScore;
 
     private Image soundOn = new Image(getClass().getResource("Image") + "sound.png");
     private Image soundOff = new Image(getClass().getResource("Image") + "unsound.png");
@@ -79,4 +87,16 @@ public class HomeController implements Initializable {
             mediaPlayer.play();
         }
     }
+    @FXML
+    public void showHighScore(ActionEvent event) throws IOException {
+        AnchorPane root = new AnchorPane();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root,300,400);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("High Score");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
+
 }
