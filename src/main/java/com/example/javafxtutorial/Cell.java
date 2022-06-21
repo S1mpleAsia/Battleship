@@ -24,12 +24,11 @@ public class Cell extends Rectangle {
 
     public boolean shoot(boolean enemy) {
         wasShot = true;
-        setFill(Color.BLACK);
+        setFill(new ImagePattern(new Image(getClass().getResource("Image") + "close.png")));
 
         if(ship != null) {
             ship.hit();
-            if(enemy) setFill(new ImagePattern(new Image(getClass().getResource("Image") + "hit.png")));
-            else setFill(Color.RED);
+            setFill(new ImagePattern(new Image(getClass().getResource("Image") + "hit.png")));
             if(!ship.isAlive()) {
                 board.ships--;
             }

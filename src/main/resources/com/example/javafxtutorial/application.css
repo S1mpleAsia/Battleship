@@ -14,3 +14,29 @@
     -fx-background-color: #F5B164;
 }
 
+#text {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-align: center;
+}
+
+#reset_btn {
+        -fx-font-size: 18;
+        -fx-font-weight: bold;
+        -fx-text-align: center;
+        -fx-pref-height: 50px;
+        -fx-pref-width: 180px;
+        -fx-cursor: hand;
+        -fx-border-style: none;
+        -fx-border-width: 2px;
+        -fx-border-color: black;
+}
+
+#reset_btn:hover {
+    -fx-background-color: #9DA9C4;
+}
+
+#reset_btn:pressed {
+    -fx-background-color: #C0C8D5;
+}
+

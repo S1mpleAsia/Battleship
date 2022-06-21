@@ -26,18 +26,20 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import static com.example.javafxtutorial.HomeController.stopPlayingSound;
+
 public class PrepareController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         shipArray.addAll(Arrays.asList(shipName));
-        myShip.getItems().addAll(Ship);
         gameMode.getItems().addAll(Mode);
         gameMode.getSelectionModel().select(0);
         playerBoard.setLayoutX(160);
         playerBoard.setLayoutY(250);
-        btnRandom.setGraphic(new ImageView(getClass().getResource("Image") + "random.png"));
-        btnDelete.setGraphic(new ImageView(getClass().getResource("Image") + "trash.png"));
-        btnRotate.setGraphic(horizontal);
+        btnRandom.setGraphic(randomShip);
+        btnDelete.setGraphic(deleteShip);
+        btnStart.setGraphic(startGame);
+        btnBack.setGraphic(backMenu);
 
         Image image0 = new Image(getClass().getResource("Image") + "carrier-horizontal.png",245,57,false,false);
         Image image1 = new Image(getClass().getResource("Image") + "battleship-horizontal.png");
@@ -209,11 +211,6 @@ public class PrepareController implements Initializable{
         root.getChildren().add(playerBoard);
         root.getChildren().add(ShipsToBePlaced);
     }
-
-    @FXML
-    private ChoiceBox<String> myShip;
-    private String[] Ship = {"Destroyer", "Cruiser", "Marine"};
-
     @FXML
     private ChoiceBox<String> gameMode;
     private String[] Mode = {"Easy","Medium","Hard"};
@@ -234,23 +231,19 @@ public class PrepareController implements Initializable{
     private Button btnRandom;
     @FXML
     private Button btnDelete;
-    @FXML
-    private Button btnRotate;
 
     private ArrayList<String> shipArray = new ArrayList<String>();
     private final String[] shipName = {"Carrier","Battleship","Cruiser","Submarine","Destroyer"};
-    private final ImageView horizontal = new ImageView(getClass().getResource("Image") + "horizontal.png");
-    private final ImageView rotate = new ImageView(getClass().getResource("Image") + "rotate.png");
-
+    private final ImageView randomShip = new ImageView(getClass().getResource("Image") + "random.png");
+    private final ImageView deleteShip = new ImageView(getClass().getResource("Image") + "trash.png");
+    private final ImageView startGame = new ImageView(getClass().getResource("Image") + "play.png");
+    private final ImageView backMenu = new ImageView(getClass().getResource("Image") + "home.png");
     private Ship carrier = new Ship(5,false,"Carrier");
     private Ship battleship = new Ship(4,false,"Battleship");
     private Ship cruiser = new Ship(3,false,"Cruiser");
     private Ship submarine = new Ship(3,false,"Submarine");
     private Ship destroyer = new Ship(2,false,"Destroyer");
-
     boolean running = false;
-
-
     @FXML
     private void randomShip(ActionEvent event) {
         resetShip(event);
@@ -324,19 +317,12 @@ public class PrepareController implements Initializable{
             ShipsToBePlaced.add(ships[i],0,i);
         }
     }
-
-    @FXML
-    private void rotateShip(ActionEvent event) throws IOException {
-        running = true;
-
-    }
-
     @FXML
     public void switchToScene3(ActionEvent event) throws IOException {
         mode = gameMode.getSelectionModel().getSelectedItem();
         System.out.println(mode);
-        running = true;
         if(ShipsToBePlaced.getChildren().isEmpty()) {
+            running = true;
             Parent root = FXMLLoader.load(getClass().getResource("gamescreen.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -345,9 +331,10 @@ public class PrepareController implements Initializable{
             stage.show();
         }
     }
-
     @FXML
     public void switchToScene1(ActionEvent event) throws IOException {
+        stopPlayingSound();
+        resetShip(event);
         Parent root = FXMLLoader.load(getClass().getResource("homescreen.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

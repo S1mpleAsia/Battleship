@@ -14,18 +14,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="72.0" layoutY="36.0" text="Ship" textFill="#133359">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="myShip" layoutX="122.0" layoutY="37.0" prefWidth="150.0" />
       <Button id="delete_btn" fx:id="btnDelete" layoutX="578.0" layoutY="127.0" mnemonicParsing="false" onAction="#resetShip" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css" />
       <Button id="random_btn" fx:id="btnRandom" layoutX="468.0" layoutY="127.0" mnemonicParsing="false" onAction="#randomShip" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <Button id="rotate_btn" fx:id="btnRotate" layoutX="355.0" layoutY="127.0" mnemonicParsing="false" onAction="#rotateShip" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css" />
       <Line endX="-14.79998779296875" endY="30.199996948242188" layoutX="689.0" layoutY="145.0" startX="-14.79998779296875" startY="-25.0" />
       <Label layoutX="699.0" layoutY="134.0" text="Difficulty" textFill="#133359">
          <font>
@@ -33,7 +26,7 @@
          </font>
       </Label>
       <ChoiceBox fx:id="gameMode" layoutX="803.0" layoutY="135.0" prefWidth="150.0" />
-      <Button id="back_btn" fx:id="btnBack" layoutX="236.0" layoutY="127.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css" text="BACK" />
-      <Button id="start_btn" fx:id="btnStart" layoutX="122.0" layoutY="127.0" mnemonicParsing="false" onAction="#switchToScene3" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css" text="START" />
+      <Button id="back_btn" fx:id="btnBack" layoutX="236.0" layoutY="127.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css" />
+      <Button id="start_btn" fx:id="btnStart" layoutX="354.0" layoutY="127.0" mnemonicParsing="false" onAction="#switchToScene3" prefHeight="42.0" prefWidth="72.0" stylesheets="@application.css" />
    </children>
 </AnchorPane>
