@@ -82,6 +82,7 @@ public class GameController implements Initializable {
             turn++;
 
             if(enemyBoard.ships == 0) {
+                updatePoint();
                 setHighScore();
                 gameStatus.setText("You Win!!");
                 gameStatus.setTextFill(Color.rgb(73,150,95));
@@ -96,7 +97,7 @@ public class GameController implements Initializable {
 
     private void updatePoint() {
         currentTurn.setText("Số điểm đã bắn: " + turn);
-        currentHit.setText("Số điểm bắn trúng: "+ hit);
+        currentHit.setText("Số điểm bắn trúng: "+ hit + "/17");
         shootRate.setText("Tỷ lệ bắn trúng: " + ((hit*100) / turn) + "%");
         fleet = 5 - playerBoard.ships;
         shipFleet.setText("Số tàu bị hạ: " + fleet + "/5");
