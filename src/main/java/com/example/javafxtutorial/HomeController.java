@@ -159,14 +159,11 @@ public class HomeController implements Initializable {
         });
 
         stage.setScene(scene);
+        Image icon = new Image(getClass().getResource("Image") + "score-icon.png");
+        stage.getIcons().add(icon);
         stage.setResizable(false);
         stage.setTitle("High Score");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
-
-    public void resetPoint(){
-
-    };
-
 }
