@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,10 +15,13 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -171,10 +173,37 @@ public class HomeController implements Initializable {
     public void showDetails(ActionEvent event) {
         AnchorPane root = new AnchorPane();
         Stage stage = new Stage();
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 900, 700);
         root.setId("details_pane");
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
+
+        Label header = new Label();
+        header.setText("Luật chơi BattleShip Game");
+        header.setTextFill(Color.rgb(0, 97, 141));
+        header.setLayoutX(180);
+        header.setLayoutY(30);
+        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
+        root.getChildren().add(header);
+
+        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
+        String content = "";
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                content = content.concat(scanner.nextLine() + "\n");
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Label body = new Label();
+        body.setText(content);
+        root.getChildren().add(body);
+
+
+        stage.setTitle("Game Rule");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
