@@ -69,27 +69,27 @@ public class PrepareController implements Initializable{
         }
 
         ShipsToBePlaced.setOnMousePressed(mouseEvent -> {
-            ImageView source = (ImageView) mouseEvent.getTarget();
-            System.out.println(GridPane.getRowIndex(source));
-            final boolean[] check = {false};
+            if(mouseEvent.getTarget() instanceof ImageView) {
+                ImageView source = (ImageView) mouseEvent.getTarget();
+                System.out.println(GridPane.getRowIndex(source));
+                final boolean[] check = {false};
 
-            source.setOnDragDetected(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    System.out.println("DragDetected");
-                    Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+                source.setOnDragDetected(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("DragDetected");
+                        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 
-                    ClipboardContent cbContent = new ClipboardContent();
-                    cbContent.putImage(source.getImage());
+                        ClipboardContent cbContent = new ClipboardContent();
+                        cbContent.putImage(source.getImage());
 
-                    db.setContent(cbContent);
-                    // source.setVisible(false);
-                    mouseEvent.consume();
-                }
-            });
+                        db.setContent(cbContent);
+                        // source.setVisible(false);
+                        mouseEvent.consume();
+                    }
+                });
 
-
-            playerBoard.setOnDragOver(new EventHandler<DragEvent>() {
+                playerBoard.setOnDragOver(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
                         if(dragEvent.getGestureSource() != playerBoard && dragEvent.getDragboard().hasImage()) {
@@ -101,7 +101,7 @@ public class PrepareController implements Initializable{
                     }
                 });
 
-            playerBoard.setOnDragEntered(new EventHandler<DragEvent>() {
+                playerBoard.setOnDragEntered(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
                         if(dragEvent.getGestureSource() != playerBoard && dragEvent.getDragboard().hasImage()) {
@@ -114,7 +114,7 @@ public class PrepareController implements Initializable{
                     }
                 });
 
-            playerBoard.setOnDragExited(new EventHandler<DragEvent>() {
+                playerBoard.setOnDragExited(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
                         ShipsToBePlaced.getChildren().add(source);
@@ -123,7 +123,7 @@ public class PrepareController implements Initializable{
                     }
                 });
 
-            playerBoard.setOnDragDropped(new EventHandler<DragEvent>() {
+                playerBoard.setOnDragDropped(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
                         Dragboard db = dragEvent.getDragboard();
@@ -184,7 +184,7 @@ public class PrepareController implements Initializable{
                     }
                 });
 
-            source.setOnDragDone(new EventHandler<DragEvent>() {
+                source.setOnDragDone(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(DragEvent dragEvent) {
                         if(dragEvent.getTransferMode() == TransferMode.MOVE){
@@ -194,6 +194,8 @@ public class PrepareController implements Initializable{
                         dragEvent.consume();
                     }
                 });
+            }
+
         });
 
         playerBoard.setOnMousePressed(event -> {

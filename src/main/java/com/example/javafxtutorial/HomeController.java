@@ -159,11 +159,14 @@ public class HomeController implements Initializable {
         });
 
         stage.setScene(scene);
+        Image icon = new Image(getClass().getResource("Image") + "score-icon.png");
+        stage.getIcons().add(icon);
         stage.setResizable(false);
         stage.setTitle("High Score");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
+<<<<<<< HEAD
 
     /**
      * Giới thiệu về Luật chơi
@@ -172,4 +175,6 @@ public class HomeController implements Initializable {
 
     };
 
+=======
+>>>>>>> c4b63405dc35074d68fe618c4a28a9c020990f5b
 }
