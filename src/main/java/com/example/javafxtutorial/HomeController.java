@@ -4,11 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -17,6 +20,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -26,6 +31,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.awt.Desktop;
 
 
 
@@ -170,43 +176,108 @@ public class HomeController implements Initializable {
         stage.showAndWait();
     }
     @FXML
-    public void showDetails(ActionEvent event) {
-        AnchorPane root = new AnchorPane();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root, 900, 700);
-        root.setId("details_pane");
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
+    public void showDetails(ActionEvent event) throws IOException {
+//        AnchorPane root = new AnchorPane();
+//        Stage stage = new Stage();
+//        Scene scene = new Scene(root, 1080, 720);
+//        root.setId("details_pane");
+//        scene.setFill(Color.TRANSPARENT);
+//        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
+//
+//        /******************************/
+//
+//        Label header = new Label();
+//        header.setText("Luật chơi BattleShip Game");
+//        header.setTextFill(Color.rgb(0, 97, 141));
+//        header.setLayoutX(180);
+//        header.setLayoutY(30);
+//        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
+//        root.getChildren().add(header);
+//
+//        /*******************************/
+//
+//        /*******************************/
+//
+//        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
+//        String content = "";
+//        try {
+//            Scanner scanner = new Scanner(file);
+//            while (scanner.hasNextLine()) {
+//                content = content.concat(scanner.nextLine() + "\n");
+//            }
+//        }
+//        catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Label body = new Label();
+//        body.setText(content);
+//        root.getChildren().add(body);
+//
+//        /********************************/
+//
+//        stage.setTitle("Game Rule");
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.initModality(Modality.APPLICATION_MODAL);
+//        stage.showAndWait();
 
-        Label header = new Label();
-        header.setText("Luật chơi BattleShip Game");
-        header.setTextFill(Color.rgb(0, 97, 141));
-        header.setLayoutX(180);
-        header.setLayoutY(30);
-        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
-        root.getChildren().add(header);
+//        ScrollPane scrollPane = new ScrollPane();
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+//        Stage stage = new Stage();
+//        Scene scene = new Scene(scrollPane, 600, 700);
+//        //root.setId("details_pane");
+//        scrollPane.setId("details_pane");
+//        scene.setFill(Color.TRANSPARENT);
+//        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
+//
+//        /******************************/
+//        //AnchorPane root = new AnchorPane();
+//        //GridPane root = new GridPane();
+//        BorderPane root = new BorderPane();
+//
+//        Label header = new Label();
+//        header.setText("Luật chơi BattleShip Game");
+//        header.setTextFill(Color.rgb(0, 97, 141));
+//        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
+//        //header.setTextAlignment(TextAlignment.CENTER);
+//        header.setAlignment(Pos.CENTER);
+//        root.setTop(header);
+//        BorderPane.setAlignment(header, Pos.CENTER);
 
-        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
-        String content = "";
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                content = content.concat(scanner.nextLine() + "\n");
-            }
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        Label body = new Label();
-        body.setText(content);
-        root.getChildren().add(body);
+        /*******************************/
 
+        /*******************************/
 
-        stage.setTitle("Game Rule");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+//        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
+//        String content = "";
+//        try {
+//            Scanner scanner = new Scanner(file);
+//            while (scanner.hasNextLine()) {
+//                content = content.concat(scanner.nextLine() + "\n");
+//            }
+//        }
+//        catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Label body = new Label();
+//        body.setText(content);
+//        root.setCenter(body);
+
+        /********************************/
+
+//        scrollPane.setContent(root);
+//        stage.setTitle("Game Rule");
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.initModality(Modality.APPLICATION_MODAL);
+//        stage.showAndWait();
+
+        File file = new File("src/main/resources/com/example/javafxtutorial/Luatchoi.docx");//đường dẫn file
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(file);
     }
 }

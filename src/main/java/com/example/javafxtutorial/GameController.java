@@ -81,18 +81,16 @@ public class GameController implements Initializable {
             if(hitShoot) hit++;
             enemyTurn = true;
             turn++;
-
+            updatePoint();
             if(enemyBoard.ships == 0) {
-                updatePoint();
                 setHighScore();
                 gameStatus.setText("You Win!!");
                 gameStatus.setTextFill(Color.rgb(73,150,95));
                 running = false;
                 return;
             }
-
             enemyMove();
-            updatePoint();
+
         });
     }
 

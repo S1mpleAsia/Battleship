@@ -40,5 +40,5 @@
 - Tuy nhiên nếu bạn để máy tính bắn chìm 5 tàu của bạn trước thì bạn sẽ thua
 
 6. Quy tắc tính điểm
-- <Điểm> = <số điểm bắn trúng>*100 + <số tàu đã bắn chìm>*1000 -<số điểm bắn trượt>*15
-- <Điểm> luôn >= 0
+- <Điểm> = <số điểm bắn trúng>*100 + <số tàu đã bắn chìm>*1000 - <số điểm bắn trượt>*15
+- <Điểm> luôn lớn hơn hoặc bằng 0
