@@ -1,4 +1,4 @@
-#play_btn, #score_btn, #exit_btn, #sound_btn{
+#play_btn, #score_btn, #exit_btn, #sound_btn, #details_btn{
     -fx-font-size: 22;
     -fx-background-radius: 10;
     -fx-cursor: hand;
@@ -18,6 +18,10 @@
     -fx-font-size: 18;
     -fx-font-weight: bold;
     -fx-text-align: center;
+}
+
+#details_pane {
+    -fx-background-color: #000000;
 }
 
 #reset_btn {

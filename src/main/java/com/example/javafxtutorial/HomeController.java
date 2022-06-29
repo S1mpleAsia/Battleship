@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -163,6 +164,19 @@ public class HomeController implements Initializable {
         stage.getIcons().add(icon);
         stage.setResizable(false);
         stage.setTitle("High Score");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
+    @FXML
+    public void showDetails(ActionEvent event) {
+        AnchorPane root = new AnchorPane();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 800, 600);
+        root.setId("details_pane");
+        scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
+        stage.setScene(scene);
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }

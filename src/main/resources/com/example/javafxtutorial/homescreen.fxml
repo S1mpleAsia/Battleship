@@ -36,5 +36,14 @@
                </image>
             </ImageView>
          </graphic></Button>
+      <Button id="details_btn" fx:id="detailsButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showDetails" prefHeight="44.0" prefWidth="43.0" style="-fx-background-color: #F99A30;" stylesheets="@application.css">
+         <graphic>
+            <ImageView fx:id="detailsIcon" fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Image/info.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
