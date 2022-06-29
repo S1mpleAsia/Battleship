@@ -45,7 +45,8 @@ public class GameController implements Initializable {
     private boolean running = true;
     private int turn = 0;
     private int hit = 0;
-    private int fleet = 0;
+    private int playerFleet = 0;
+    private int enemyFleet = 0;
     private int point = 0;
 
     @Override
@@ -99,9 +100,11 @@ public class GameController implements Initializable {
         currentTurn.setText("Số điểm đã bắn: " + turn);
         currentHit.setText("Số điểm bắn trúng: "+ hit + "/17");
         shootRate.setText("Tỷ lệ bắn trúng: " + ((hit*100) / turn) + "%");
-        fleet = 5 - playerBoard.ships;
-        shipFleet.setText("Số tàu bị hạ: " + fleet + "/5");
-        point = hit * 100 + fleet * 1000 + ((hit * 100) / turn) * 100;
+        playerFleet = 5 - playerBoard.ships;
+        enemyFleet = 5 - enemyBoard.ships;
+        shipFleet.setText("Số tàu bị hạ: " + playerFleet + "/5");
+        point = hit * 100 + enemyFleet * 1000 - (turn-hit)*15;
+        if(point < 0) point = 0;
         playerPoint.setText("" + point);
     }
 
