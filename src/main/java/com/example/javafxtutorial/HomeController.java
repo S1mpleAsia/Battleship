@@ -165,7 +165,10 @@ public class HomeController implements Initializable {
         stage.showAndWait();
     }
 
-    public void resetPoint(){
+    /**
+     * Giới thiệu về Luật chơi
+     */
+    public void showAboutGame(){
 
     };
 
