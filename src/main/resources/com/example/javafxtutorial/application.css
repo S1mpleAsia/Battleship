@@ -24,6 +24,9 @@
     -fx-background-color: #D0CFFF;
 }
 
+#scroll {
+    -fx-background: #D0CFFF;
+}
 #reset_btn {
         -fx-font-size: 18;
         -fx-font-weight: bold;

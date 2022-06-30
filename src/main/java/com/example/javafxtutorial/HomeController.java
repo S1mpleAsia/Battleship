@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -176,108 +177,64 @@ public class HomeController implements Initializable {
         stage.showAndWait();
     }
     @FXML
-    public void showDetails(ActionEvent event) throws IOException {
-//        AnchorPane root = new AnchorPane();
-//        Stage stage = new Stage();
-//        Scene scene = new Scene(root, 1080, 720);
-//        root.setId("details_pane");
-//        scene.setFill(Color.TRANSPARENT);
-//        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
-//
-//        /******************************/
-//
-//        Label header = new Label();
-//        header.setText("Luật chơi BattleShip Game");
-//        header.setTextFill(Color.rgb(0, 97, 141));
-//        header.setLayoutX(180);
-//        header.setLayoutY(30);
-//        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
-//        root.getChildren().add(header);
-//
-//        /*******************************/
-//
-//        /*******************************/
-//
-//        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
-//        String content = "";
-//        try {
-//            Scanner scanner = new Scanner(file);
-//            while (scanner.hasNextLine()) {
-//                content = content.concat(scanner.nextLine() + "\n");
-//            }
-//        }
-//        catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Label body = new Label();
-//        body.setText(content);
-//        root.getChildren().add(body);
-//
-//        /********************************/
-//
-//        stage.setTitle("Game Rule");
-//        stage.setScene(scene);
-//        stage.setResizable(false);
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.showAndWait();
+    public void showDetails(ActionEvent event){
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setId("scroll");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        Stage stage = new Stage();
+        Scene scene = new Scene(scrollPane, 900, 700);
+        scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
 
-//        ScrollPane scrollPane = new ScrollPane();
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-//        Stage stage = new Stage();
-//        Scene scene = new Scene(scrollPane, 600, 700);
-//        //root.setId("details_pane");
-//        scrollPane.setId("details_pane");
-//        scene.setFill(Color.TRANSPARENT);
-//        scene.getStylesheets().add(String.valueOf(getClass().getResource("application.css")));
-//
-//        /******************************/
-//        //AnchorPane root = new AnchorPane();
-//        //GridPane root = new GridPane();
-//        BorderPane root = new BorderPane();
-//
-//        Label header = new Label();
-//        header.setText("Luật chơi BattleShip Game");
-//        header.setTextFill(Color.rgb(0, 97, 141));
-//        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
-//        //header.setTextAlignment(TextAlignment.CENTER);
-//        header.setAlignment(Pos.CENTER);
-//        root.setTop(header);
-//        BorderPane.setAlignment(header, Pos.CENTER);
+        AnchorPane root = new AnchorPane();
+        root.setId("details_pane");
 
+        Label header = new Label();
+        header.setText("Luật chơi BattleShip Game");
+        header.setTextFill(Color.rgb(0, 97, 141));
+        header.setLayoutX(200);
+        header.setLayoutY(30);
+        header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
+        root.getChildren().add(header);
 
-        /*******************************/
+        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
+        String content = "";
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                content = content.concat(scanner.nextLine() + "\n");
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Label body = new Label();
+        body.setText(content);
+        body.setLayoutY(100);
+        body.setFont(Font.font("Verdana", FontWeight.BOLD,12));
+        body.setPadding(new Insets(0,0,30,10));
+        root.getChildren().add(body);
 
-        /*******************************/
+        ImageView ship = new ImageView(new Image(getClass().getResource("Image") + "ship.png"));
+        ImageView hit = new ImageView(new Image(getClass().getResource("Image") + "hit.png"));
+        ImageView miss = new ImageView(new Image(getClass().getResource("Image") + "close.png",35,35,true,true));
+        ship.setLayoutX(580);
+        ship.setLayoutY(120);
+        hit.setLayoutX(220);
+        hit.setLayoutY(570);
+        miss.setLayoutY(660);
+        miss.setLayoutX(200);
 
-//        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
-//        String content = "";
-//        try {
-//            Scanner scanner = new Scanner(file);
-//            while (scanner.hasNextLine()) {
-//                content = content.concat(scanner.nextLine() + "\n");
-//            }
-//        }
-//        catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Label body = new Label();
-//        body.setText(content);
-//        root.setCenter(body);
+        root.getChildren().add(hit);
+        root.getChildren().add(miss);
+        root.getChildren().add(ship);
 
-        /********************************/
-
-//        scrollPane.setContent(root);
-//        stage.setTitle("Game Rule");
-//        stage.setScene(scene);
-//        stage.setResizable(false);
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.showAndWait();
-
-        File file = new File("src/main/resources/com/example/javafxtutorial/Luatchoi.docx");//đường dẫn file
-        Desktop desktop = Desktop.getDesktop();
-        desktop.open(file);
+        scrollPane.setContent(root);
+        stage.setTitle("Game Rule");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
 }
