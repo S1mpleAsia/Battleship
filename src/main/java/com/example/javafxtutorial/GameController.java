@@ -81,6 +81,7 @@ public class GameController implements Initializable {
             if(hitShoot) hit++;
             enemyTurn = true;
             turn++;
+            updatePoint();
             if(enemyBoard.ships == 0) {
                 updatePoint();
                 setHighScore();
@@ -90,7 +91,7 @@ public class GameController implements Initializable {
                 return;
             }
             enemyMove();
-            updatePoint();
+            //updatePoint();
 
         });
     }
@@ -122,6 +123,7 @@ public class GameController implements Initializable {
             enemyTurn = false;
 
             if(playerBoard.ships == 0) {
+                updatePoint();
                 setHighScore();
                 gameStatus.setText("You Lose!!");
                 gameStatus.setTextFill(Color.rgb(255,18,18));
@@ -227,6 +229,7 @@ public class GameController implements Initializable {
             enemyTurn = false;
 
             if(playerBoard.ships == 0) {
+                updatePoint();
                 setHighScore();
                 gameStatus.setText("You Lose!!");
                 gameStatus.setTextFill(Color.rgb(255,18,18));
@@ -332,6 +335,7 @@ public class GameController implements Initializable {
             enemyTurn = false;
 
             if(playerBoard.ships == 0) {
+                updatePoint();
                 setHighScore();
                 gameStatus.setText("You Lose!!");
                 gameStatus.setTextFill(Color.rgb(255,18,18));
