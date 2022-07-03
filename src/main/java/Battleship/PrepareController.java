@@ -31,6 +31,13 @@ import static Battleship.HomeController.stopPlayingSound;
 public class PrepareController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ImageView randomShip = new ImageView(getClass().getResource("Image") + "random.png");
+        ImageView deleteShip = new ImageView(getClass().getResource("Image") + "trash.png");
+        ImageView startGame = new ImageView(getClass().getResource("Image") + "play.png");
+        ImageView backMenu = new ImageView(getClass().getResource("Image") + "home.png");
+        String[] shipName = {"Carrier","Battleship","Cruiser","Submarine","Destroyer"};
+        String[] Mode = {"Easy","Medium","Hard"};
+
         shipArray.addAll(Arrays.asList(shipName));
         gameMode.getItems().addAll(Mode);
         gameMode.getSelectionModel().select(0);
@@ -215,7 +222,6 @@ public class PrepareController implements Initializable{
     }
     @FXML
     private ChoiceBox<String> gameMode;
-    private String[] Mode = {"Easy","Medium","Hard"};
     @FXML
     private AnchorPane root;
     public static Board playerBoard = new Board(false);
@@ -230,13 +236,7 @@ public class PrepareController implements Initializable{
     private Button btnRandom;
     @FXML
     private Button btnDelete;
-
     private ArrayList<String> shipArray = new ArrayList<String>();
-    private final String[] shipName = {"Carrier","Battleship","Cruiser","Submarine","Destroyer"};
-    private final ImageView randomShip = new ImageView(getClass().getResource("Image") + "random.png");
-    private final ImageView deleteShip = new ImageView(getClass().getResource("Image") + "trash.png");
-    private final ImageView startGame = new ImageView(getClass().getResource("Image") + "play.png");
-    private final ImageView backMenu = new ImageView(getClass().getResource("Image") + "home.png");
     private Ship carrier = new Ship(5,false,"Carrier");
     private Ship battleship = new Ship(4,false,"Battleship");
     private Ship cruiser = new Ship(3,false,"Cruiser");
