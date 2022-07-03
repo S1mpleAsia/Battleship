@@ -1,4 +1,4 @@
-package com.example.javafxtutorial;
+package Battleship;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,16 +18,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import static com.example.javafxtutorial.HomeController.stopPlayingSound;
-import static com.example.javafxtutorial.PrepareController.*;
+import static Battleship.HomeController.stopPlayingSound;
+import static Battleship.PrepareController.*;
 
 public class GameController implements Initializable {
     private Board myBoard = playerBoard;
     @FXML
     private AnchorPane gameRoot;
-    public Board enemyBoard = new Board(true);
+    private Board enemyBoard = new Board(true);
     private boolean enemyTurn = false;
-    private Random random = new Random();
     private Cell rootTarget;
     private LinkedList<Cell> nextTarget = new LinkedList<>();
     @FXML
@@ -51,6 +50,7 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Random random = new Random();
         myBoard.setLayoutX(80);
         myBoard.setLayoutY(200);
         enemyBoard.setLayoutX(600);
@@ -73,26 +73,27 @@ public class GameController implements Initializable {
 
     public void startGame() {
         enemyBoard.setOnMousePressed(event -> {
-            if(!running) return;
-            Cell cell = (Cell) event.getTarget();
-            if(cell.wasShot) return;
+            if(event.getTarget() instanceof  Cell) {
+                if(!running) return;
+                Cell cell = (Cell) event.getTarget();
+                if(cell.wasShot) return;
 
-            boolean hitShoot = cell.shoot(true);
-            if(hitShoot) hit++;
-            enemyTurn = true;
-            turn++;
-            updatePoint();
-            if(enemyBoard.ships == 0) {
+                boolean hitShoot = cell.shoot(true);
+                if(hitShoot) hit++;
+                enemyTurn = true;
+                turn++;
                 updatePoint();
-                setHighScore();
-                gameStatus.setText("You Win!!");
-                gameStatus.setTextFill(Color.rgb(73,150,95));
-                running = false;
-                return;
+                if(enemyBoard.ships == 0) {
+                    updatePoint();
+                    setHighScore();
+                    gameStatus.setText("You Win!!");
+                    gameStatus.setTextFill(Color.rgb(73,150,95));
+                    running = false;
+                    return;
+                }
+                enemyMove();
+                //updatePoint();
             }
-            enemyMove();
-            //updatePoint();
-
         });
     }
 
@@ -109,6 +110,7 @@ public class GameController implements Initializable {
     }
 
     private void enemyMove() {
+        Random random = new Random();
         if(Objects.equals(mode, "Easy")) {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
@@ -148,7 +150,7 @@ public class GameController implements Initializable {
 
                 rootTarget.shoot(false);
 
-                if(rootTarget.ship != null){
+                if(rootTarget.getShip() != null){
                     if((rootTarget.x+1) <= 9){
                         Cell neighbor = playerBoard.getCell(rootTarget.x+1, rootTarget.y);
                         if((!neighbor.wasShot)) nextTarget.offer(neighbor);
@@ -177,7 +179,7 @@ public class GameController implements Initializable {
                 System.out.println(target.x);
                 System.out.println(target.y);
 
-                if ((target.ship != null)){
+                if ((target.getShip() != null)){
 
 //                    if (target.y == rootTarget.y) {
 //                        while (true){
@@ -245,7 +247,7 @@ public class GameController implements Initializable {
                 do{
                     x = random.nextInt(10);
                     y = random.nextInt(10);
-                } while((playerBoard.getCell(x, y).wasShot) || (playerBoard.getCell(x, y).ship == null));
+                } while((playerBoard.getCell(x, y).wasShot) || (playerBoard.getCell(x, y).getShip() == null));
 
                 rootTarget = playerBoard.getCell(x,y);
 
@@ -254,7 +256,7 @@ public class GameController implements Initializable {
 
                 rootTarget.shoot(false);
 
-                if(rootTarget.ship != null){
+                if(rootTarget.getShip() != null){
                     if((rootTarget.x+1) <= 9){
                         Cell neighbor = playerBoard.getCell(rootTarget.x+1, rootTarget.y);
                         if((!neighbor.wasShot)) nextTarget.offer(neighbor);
@@ -283,7 +285,7 @@ public class GameController implements Initializable {
                 System.out.println(target.x);
                 System.out.println(target.y);
 
-                if ((target.ship != null)){
+                if ((target.getShip() != null)){
 
 //                    if (target.y == rootTarget.y) {
 //                        while (true){
@@ -345,7 +347,7 @@ public class GameController implements Initializable {
     }
 
     public void setHighScore() {
-        File file = new File("src/main/resources/com/example/javafxtutorial/highscore.txt");
+        File file = new File("src/main/resources/Battleship/highscore.txt");
         int[] A = new int[6];
 
         try {
@@ -368,7 +370,7 @@ public class GameController implements Initializable {
 
         String s = "" + A[5] + " " + A[4] + " " + A[3] + " " + A[2] + " " + A[1];
         try {
-            FileWriter fw = new FileWriter("src/main/resources/com/example/javafxtutorial/highscore.txt");
+            FileWriter fw = new FileWriter("src/main/resources/Battleship/highscore.txt");
             fw.write(s);
             fw.close();
 

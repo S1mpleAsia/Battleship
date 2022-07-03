@@ -1,4 +1,4 @@
-package com.example.javafxtutorial;
+package Battleship;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,7 +54,7 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         soundIcon.setImage(soundOn);
         songs = new ArrayList<File>();
-        directory = new File("src/main/resources/com/example/javafxtutorial/Music");
+        directory = new File("src/main/resources/Battleship/Music");
         files = directory.listFiles();
 
         if(files != null) {
@@ -120,7 +120,7 @@ public class HomeController implements Initializable {
         Background bGround = new Background(bImg);
         root.setBackground(bGround);
 
-        File file = new File("src/main/resources/com/example/javafxtutorial/highscore.txt");
+        File file = new File("src/main/resources/Battleship/highscore.txt");
         Label[] score = new Label[5];
         GridPane gridPane = new GridPane();
         gridPane.setHgap(60);
@@ -159,7 +159,7 @@ public class HomeController implements Initializable {
             String s = "" + A[4] + " " + A[3] + " " + A[2] + " " + A[1] + " " + A[0];
 
             try {
-                FileWriter fw = new FileWriter("src/main/resources/com/example/javafxtutorial/highscore.txt");
+                FileWriter fw = new FileWriter("src/main/resources/Battleship/highscore.txt");
                 fw.write(s);
                 fw.close();
 
@@ -198,7 +198,7 @@ public class HomeController implements Initializable {
         header.setFont(Font.font("Verdana", FontWeight.BOLD,30));
         root.getChildren().add(header);
 
-        File file = new File("src/main/resources/com/example/javafxtutorial/details.txt");
+        File file = new File("src/main/resources/Battleship/details.txt");
         String content = "";
         try {
             Scanner scanner = new Scanner(file);

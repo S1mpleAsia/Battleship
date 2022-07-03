@@ -1,4 +1,4 @@
-package com.example.javafxtutorial;
+package Battleship;
 
 
 import javafx.event.ActionEvent;
@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import static com.example.javafxtutorial.HomeController.stopPlayingSound;
+import static Battleship.HomeController.stopPlayingSound;
 
 public class PrepareController implements Initializable{
     @Override
@@ -201,9 +201,9 @@ public class PrepareController implements Initializable{
         playerBoard.setOnMousePressed(event -> {
             if(running) return;
             Cell cell = (Cell) event.getTarget();
-            if(cell.ship == null) return;
+            if(cell.getShip() == null) return;
 
-            playerBoard.rotateShip(cell.ship,cell.ship.x,cell.ship.y);
+            playerBoard.rotateShip(cell.getShip(),cell.getShip().getX(),cell.getShip().getY());
         });
 
         ShipsToBePlaced.setLayoutX(750);
@@ -216,15 +216,12 @@ public class PrepareController implements Initializable{
     @FXML
     private ChoiceBox<String> gameMode;
     private String[] Mode = {"Easy","Medium","Hard"};
-
     @FXML
     private AnchorPane root;
-
     public static Board playerBoard = new Board(false);
     private ImageView[] ships;
     private GridPane ShipsToBePlaced = new GridPane();
     public static String mode;
-
     @FXML
     private Button btnStart;
     @FXML
@@ -245,7 +242,7 @@ public class PrepareController implements Initializable{
     private Ship cruiser = new Ship(3,false,"Cruiser");
     private Ship submarine = new Ship(3,false,"Submarine");
     private Ship destroyer = new Ship(2,false,"Destroyer");
-    boolean running = false;
+    private boolean running = false;
     @FXML
     private void randomShip(ActionEvent event) {
         resetShip(event);
@@ -256,7 +253,7 @@ public class PrepareController implements Initializable{
             int y = random.nextInt(10);
             System.out.println("x:" + x + " " + "y:" + y);
 
-            if(playerBoard.getCell(x,y).ship != null) continue;
+            if(playerBoard.getCell(x,y).getShip() != null) continue;
             for(String str : shipArray) {
                 if(str.equals(ShipType.CARRIER.name)){
                     boolean check = playerBoard.placeShip(new Ship(ShipType.CARRIER.size,Math.random() < 0.5,ShipType.CARRIER.name),x,y);
@@ -299,9 +296,9 @@ public class PrepareController implements Initializable{
         for(int i = 0;i < 10;i++){
             for(int j = 0;j < 10;j++){
                 Cell cell = playerBoard.getCell(i,j);
-                if(cell.ship != null){
-                    cell.ship.vertical = false;
-                    cell.ship = null;
+                if(cell.getShip() != null){
+                    cell.getShip().setVertical(false);
+                    cell.setShip(null);
                     cell.setFill(Color.LIGHTGRAY);
                     cell.setStroke(Color.BLACK);
                 }

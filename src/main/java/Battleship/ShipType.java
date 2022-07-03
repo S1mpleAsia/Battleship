@@ -1,4 +1,4 @@
-package com.example.javafxtutorial;
+package Battleship;
 
 public enum ShipType {
 

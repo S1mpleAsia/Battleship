@@ -1,4 +1,4 @@
-package com.example.javafxtutorial;
+package Battleship;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
     public int x,y;
-    public Ship ship = null;
+    private Ship ship = null;
     public boolean wasShot = false;
     private Board board;
 
@@ -24,11 +24,11 @@ public class Cell extends Rectangle {
 
     public boolean shoot(boolean enemy) {
         wasShot = true;
-        setFill(new ImagePattern(new Image(getClass().getResource("Image") + "close.png")));
+        setCellImage();
 
         if(ship != null) {
             ship.hit();
-            setFill(new ImagePattern(new Image(getClass().getResource("Image") + "hit.png")));
+            setCellImage();
             if(!ship.isAlive()) {
                 board.ships--;
             }
@@ -36,6 +36,22 @@ public class Cell extends Rectangle {
         }
 
         return false;
+    }
+
+    public void setCellImage() {
+        setFill(new ImagePattern(new Image(getClass().getResource("Image") + "close.png")));
+
+        if(ship != null) {
+            setFill(new ImagePattern(new Image(getClass().getResource("Image") + "hit.png")));
+        }
+    }
+
+    public Ship getShip() {
+        return ship;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
     }
 
 }

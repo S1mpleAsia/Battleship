@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="home_screen" fx:id="homeScreen" prefHeight="650.0" prefWidth="500.0" style="-fx-background-color: #B0C4DE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxtutorial.HomeController">
+<AnchorPane id="home_screen" fx:id="homeScreen" prefHeight="650.0" prefWidth="500.0" style="-fx-background-color: #B0C4DE;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Battleship.HomeController">
    <children>
       <ImageView fitHeight="650.0" fitWidth="500.0" layoutY="1.0">
          <image>
